@@ -22,23 +22,7 @@ A comprehensive, web-based study companion designed for MCA (Master of Computer 
 * **CSS3** - Custom styling with CSS Variables for theming.
 * **JavaScript (ES6+)** - Vanilla JS for routing, quiz logic, and DOM manipulation.
 * **JSON** - Data storage for questions and syllabus.
-
-## 🚀 Getting Started
-
-### Prerequisites
-You don't need Node.js or any backend server. This is a static web application. However, to avoid local CORS issues when fetching JSON data, it is best run using a local development server.
-
-### Installation
-
-1.  **Clone the repository:**
-    ```bash
-    git clone [https://github.com/sanjib-d/CU_MCQ_Practice.git](https://github.com/sanjib-d/CU_MCQ_Practice.git)
-    cd CU_MCQ_Practice
-    ```
-
-2.  **Run the project:**
-    * **VS Code:** Install the "Live Server" extension, right-click `index.html`, and select "Open with Live Server".
-    * **Python:** Run `python -m http.server 8000` and open `localhost:8000` in your browser.
+---
 
 ## 📂 Project Structure
 
@@ -53,7 +37,8 @@ You don't need Node.js or any backend server. This is a static web application. 
 ├── style.css              # Main stylesheet and themes
 ├── index.html             # Entry point
 └── README.md              # Project documentation
-
+```
+---
 ## 📝 How to Add New Questions
 
 To add a new subject or new questions, follow these steps:
@@ -89,4 +74,4 @@ To add a new subject or new questions, follow these steps:
 
 Made with ❤️ by **Sanjib**
 
-* **GitHub:** [@sanjib-d](https://github.com/sanjib-d)
+* **GitHub:** [Sanjib Das](https://github.com/sanjib-d)
