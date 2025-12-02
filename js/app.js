@@ -5,10 +5,37 @@ let currentSelection = {
     subject: null
 };
 
+// --- Initialization ---
 document.addEventListener('DOMContentLoaded', () => {
+    initTheme(); // Load saved theme preference
     initStreamView();
 });
 
+// --- Theme Logic ---
+function initTheme() {
+    const themeBtn = document.getElementById('theme-toggle');
+    const storedTheme = localStorage.getItem('theme');
+    const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+    // Apply dark mode if stored or if system prefers it (and no storage)
+    if (storedTheme === 'dark' || (!storedTheme && systemDark)) {
+        document.body.classList.add('dark-mode');
+        themeBtn.innerText = '☀️';
+    } else {
+        themeBtn.innerText = '🌙';
+    }
+
+    // Toggle Click Event
+    themeBtn.addEventListener('click', () => {
+        document.body.classList.toggle('dark-mode');
+        const isDark = document.body.classList.contains('dark-mode');
+
+        themeBtn.innerText = isDark ? '☀️' : '🌙';
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    });
+}
+
+// --- Navigation Logic (History Manager) ---
 function navigateTo(viewId) {
     const currentView = document.querySelector('.view-section:not(.hidden)');
     if (currentView) {
@@ -17,7 +44,7 @@ function navigateTo(viewId) {
 
     document.querySelectorAll('.view-section').forEach(el => el.classList.add('hidden'));
     document.getElementById(viewId).classList.remove('hidden');
-    
+
     updateNavButtons();
     window.scrollTo(0, 0);
 }
