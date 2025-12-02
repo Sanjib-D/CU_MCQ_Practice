@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MCA Practice Hub</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header>
+        <div class="header-content">
+            <h1>MCA Hub</h1>
+            
+            <div class="nav-controls">
+                <button id="back-btn" class="nav-btn hidden" onclick="goBack()">← Back</button>
+                <button id="home-btn" class="nav-btn hidden" onclick="resetApp()">🏠 Home</button>
+            </div>
+        </div>
+    </header>
+
+    <main id="app-container">
+        
+        <section id="view-stream" class="view-section">
+            <h2>Select Stream</h2>
+            <div class="card-grid" id="stream-cards"></div>
+        </section>
+
+        <section id="view-semester" class="view-section hidden">
+            <h2>Select Semester</h2>
+            <div class="card-grid" id="sem-cards"></div>
+        </section>
+
+        <section id="view-specialization" class="view-section hidden">
+            <h2>Select Specialization</h2>
+            <div class="card-grid" id="spec-cards"></div>
+        </section>
+
+        <section id="view-subject" class="view-section hidden">
+            <h2>Select Subject</h2>
+            <div class="card-grid" id="subject-cards"></div>
+        </section>
+
+        <section id="view-action" class="view-section hidden">
+            <h2 id="action-subject-title">Subject Name</h2>
+            <div class="card-grid">
+                <div class="card action-card syllabus-card-bg" onclick="viewSyllabus()">
+                    <div class="icon">📖</div>
+                    <h3>View Syllabus</h3>
+                    <p>Modules & Topics</p>
+                </div>
+
+                <div class="card action-card summary-card-bg" onclick="prepareMode('summary')">
+                    <div class="icon">🧠</div>
+                    <h3>Study Mode</h3>
+                    <p>Read Q&A & Explanations</p>
+                </div>
+
+                <div class="card action-card practice-card-bg" onclick="prepareMode('quiz')">
+                    <div class="icon">✍️</div>
+                    <h3>Practice Test</h3>
+                    <p>Take Interactive MCQ Test</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="view-summary-content" class="view-section hidden">
+            <h2 id="summary-title">Module Summary</h2>
+            <div id="summary-list" class="review-list">
+                </div>
+        </section>
+
+        <section id="view-syllabus-content" class="view-section hidden">
+            <h2 id="syllabus-title">Syllabus</h2>
+            <div id="syllabus-container" class="syllabus-box">
+                </div>
+        </section>
+
+        <section id="view-chapters" class="view-section hidden">
+            <h2>Select Module</h2>
+            <div class="card-grid" id="chapter-cards"></div>
+        </section>
+
+        <section id="view-quiz" class="view-section hidden">
+            <div class="quiz-header">
+                <span id="quiz-progress">Q 1/10</span>
+                <span id="quiz-timer">Time: 00:00</span>
+            </div>
+            <div class="question-box">
+                <h3 id="question-text">Loading...</h3>
+                <div id="options-container" class="options-grid"></div>
+            </div>
+            <div class="quiz-footer">
+                <button id="next-btn" class="primary-btn" onclick="nextQuestion()">Next Question</button>
+                <button id="submit-btn" class="success-btn hidden" onclick="submitQuiz()">Submit Test</button>
+            </div>
+        </section>
+
+        <section id="view-result" class="view-section hidden">
+            <div class="result-summary">
+                <div class="score-card">
+                    <span class="score-label">Your Score</span>
+                    <h1 id="score-text">0/0</h1>
+                    <p id="score-percentage">0%</p>
+                </div>
+            </div>
+            
+            <h3>Detailed Analysis</h3>
+            <div id="review-container" class="review-list"></div>
+            
+            <div class="result-actions">
+                <button class="secondary-btn" onclick="resetApp()">Home</button>
+                <button class="primary-btn" onclick="preparePractice()">Retry Test</button>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="js/syllabus-data.js"></script>
+    <script src="js/quiz-engine.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
