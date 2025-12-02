@@ -1,8 +1,19 @@
+// --- Helper: Prevent HTML code in data from breaking layout ---
+function escapeHTML(str) {
+    if (!str) return str;
+    return str.toString()
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
+
 let allQuestions = [];
 let activeQuestions = [];
 let currentQuestionIndex = 0;
 let userAnswers = [];
-let quizSubMode = 'standard'; // 'standard' (End) or 'immediate' (Every Question)
+let quizSubMode = 'standard'; 
 
 // Timer Variables
 let timerInterval;
@@ -17,7 +28,6 @@ async function initChapterSelection(subjectCode) {
         allQuestions = await response.json();
         const chapters = [...new Set(allQuestions.map(q => q.chapter))].sort((a, b) => a - b);
 
-        // Default to standard when entering selection
         quizSubMode = 'standard';
         renderChapters(chapters);
     } catch (error) {
@@ -34,7 +44,6 @@ function renderChapters(chapters) {
 
     let html = '';
 
-    // --- NEW: Mode Selector (Only for Quiz) ---
     if (currentSelection.mode === 'quiz') {
         html += `
         <div class="summary-controls" style="margin-bottom: 25px;">
@@ -63,11 +72,8 @@ function renderChapters(chapters) {
     container.innerHTML = html;
 }
 
-// --- NEW: Handle Sub-Mode Switching ---
 function setQuizSubMode(mode, btn) {
     quizSubMode = mode;
-    // Re-render to update active classes strictly, 
-    // or just toggle UI classes for performance (using re-render here for simplicity)
     const chapters = [...new Set(allQuestions.map(q => q.chapter))].sort((a, b) => a - b);
     renderChapters(chapters);
 }
@@ -121,18 +127,19 @@ function switchSummaryMode(mode) {
     const btnQa = document.getElementById('btn-mode-qa');
     const btnExp = document.getElementById('btn-mode-exp');
 
+    // UPDATED: Added escapeHTML wrappers for Question, Options, and Explanation
     if (mode === 'qa') {
         btnQa.classList.add('active');
         btnExp.classList.remove('active');
 
         contentArea.innerHTML = activeQuestions.map((q, i) => `
             <div class="summary-item">
-                <span class="summary-q">Q${i + 1}: ${q.question}</span>
+                <span class="summary-q">Q${i + 1}: ${escapeHTML(q.question)}</span>
                 <div class="summary-answer">
-                    <strong>✅ Answer:</strong> ${q.options[q.answerIndex]}
+                    <strong>✅ Answer:</strong> ${escapeHTML(q.options[q.answerIndex])}
                 </div>
                 <div class="summary-explanation">
-                    <strong>💡 Explanation:</strong> ${q.explanation || 'No explanation provided.'}
+                    <strong>💡 Explanation:</strong> ${q.explanation ? escapeHTML(q.explanation) : 'No explanation provided.'}
                 </div>
             </div>
         `).join('');
@@ -142,7 +149,7 @@ function switchSummaryMode(mode) {
         btnExp.classList.add('active');
 
         contentArea.innerHTML = activeQuestions.map((q, i) => {
-            const expText = q.explanation ? q.explanation : "No explanation provided for this question.";
+            const expText = q.explanation ? escapeHTML(q.explanation) : "No explanation provided for this question.";
             return `
             <div class="explanation-only-card">
                 <div class="exp-number">#${i + 1}</div>
@@ -202,42 +209,37 @@ function renderQuestion() {
     const optionsContainer = document.getElementById('options-container');
     const explanationBox = document.getElementById('quiz-explanation');
 
-    // Hide Explanation initially
     explanationBox.classList.add('hidden');
-    optionsContainer.classList.remove('locked'); // Unlock options
+    optionsContainer.classList.remove('locked');
 
     const hasAnswered = userAnswers[currentQuestionIndex] !== null;
 
+    // UPDATED: Added escapeHTML to options map
     optionsContainer.innerHTML = q.options.map((opt, index) => {
         let btnClass = '';
 
         if (quizSubMode === 'standard') {
-            // Standard: Just show selected blue
             if (userAnswers[currentQuestionIndex] === index) btnClass = 'selected';
         } else {
-            // Immediate: Show Green/Red
             if (hasAnswered) {
                 if (index === q.answerIndex) {
-                    btnClass = 'correct-immediate'; // Always show correct answer in green
+                    btnClass = 'correct-immediate'; 
                 } else if (userAnswers[currentQuestionIndex] === index) {
-                    btnClass = 'wrong-immediate'; // Show user's wrong answer in red
+                    btnClass = 'wrong-immediate';
                 }
             }
         }
 
-        return `<button class="option-btn ${btnClass}" onclick="selectOption(${index})">${opt}</button>`;
+        return `<button class="option-btn ${btnClass}" onclick="selectOption(${index})">${escapeHTML(opt)}</button>`;
     }).join('');
 
-    // Immediate Mode Post-Answer Logic
+    // UPDATED: Added escapeHTML to explanation
     if (quizSubMode === 'immediate' && hasAnswered) {
-        optionsContainer.classList.add('locked'); // Lock options so they can't change
-
-        // Show Explanation
-        explanationBox.innerHTML = `<strong>💡 Explanation:</strong> ${q.explanation || 'No explanation provided.'}`;
+        optionsContainer.classList.add('locked'); 
+        explanationBox.innerHTML = `<strong>💡 Explanation:</strong> ${q.explanation ? escapeHTML(q.explanation) : 'No explanation provided.'}`;
         explanationBox.classList.remove('hidden');
     }
 
-    // --- BUTTON LOGIC ---
     const isFirst = currentQuestionIndex === 0;
     const isLast = currentQuestionIndex === activeQuestions.length - 1;
 
@@ -247,7 +249,6 @@ function renderQuestion() {
 }
 
 function selectOption(index) {
-    // If Immediate mode and already answered, do nothing (prevent changing)
     if (quizSubMode === 'immediate' && userAnswers[currentQuestionIndex] !== null) {
         return;
     }
@@ -281,19 +282,20 @@ function submitQuiz() {
 
         if (isCorrect) score++;
 
-        const userAnsText = userAnsIndex !== null ? q.options[userAnsIndex] : "Skipped";
-        const correctAnsText = q.options[q.answerIndex];
+        // UPDATED: Added escapeHTML for result details
+        const userAnsText = userAnsIndex !== null ? escapeHTML(q.options[userAnsIndex]) : "Skipped";
+        const correctAnsText = escapeHTML(q.options[q.answerIndex]);
 
         resultHtml += `
             <div class="review-item ${isCorrect ? 'correct' : 'wrong'}">
-                <span class="review-q">Q${i + 1}: ${q.question}</span>
+                <span class="review-q">Q${i + 1}: ${escapeHTML(q.question)}</span>
                 <div class="review-detail">
                     ${isCorrect
                 ? `<span class="val-correct">✔ Your Answer: ${userAnsText}</span>`
                 : `<span class="val-wrong">✘ Your Answer: ${userAnsText}</span> <span class="val-correct">✔ Correct: ${correctAnsText}</span>`
             }
                 </div>
-                ${!isCorrect ? `<div class="explanation">💡 <strong>Explanation:</strong> ${q.explanation || 'No explanation available.'}</div>` : ''}
+                ${!isCorrect ? `<div class="explanation">💡 <strong>Explanation:</strong> ${q.explanation ? escapeHTML(q.explanation) : 'No explanation available.'}</div>` : ''}
             </div>
         `;
     });

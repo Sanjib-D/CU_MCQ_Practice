@@ -1417,6 +1417,32 @@
         "explanation": "Every item within order list (and unordered list) is denoted by <LI> tag[cite: 35, 64]."
     },
     {
+        "id": 108,
+        "chapter": 4,
+        "question": "Which tag is used to create an Ordered List in HTML?",
+        "options": [
+            "<UL>",
+            "<DL>",
+            "<OL>",
+            "<LI>"
+        ],
+        "answerIndex": 2,
+        "explanation": "Ordered list is enclosed within <OL>&</OL> tag."
+    },
+    {
+        "id": 109,
+        "chapter": 4,
+        "question": "Which tag is used to define a list item within an ordered or unordered list?",
+        "options": [
+            "<DT>",
+            "<DD>",
+            "<LIST>",
+            "<LI>"
+        ],
+        "answerIndex": 3,
+        "explanation": "Every item within order list (and unordered list) is denoted by <LI> tag."
+    },
+    {
         "id": 110,
         "chapter": 4,
         "question": "What does the 'Type' attribute specify in an Ordered List?",
@@ -1427,7 +1453,7 @@
             "The spacing between items"
         ],
         "answerIndex": 2,
-        "explanation": "The 'Type' attribute specifies the numbering type for the list (e.g., numbers, letters, Roman numerals)[cite: 37]."
+        "explanation": "The 'Type' attribute specifies the numbering type for the list (e.g., numbers, letters, Roman numerals)."
     },
     {
         "id": 111,
@@ -1440,7 +1466,7 @@
             "Init"
         ],
         "answerIndex": 1,
-        "explanation": "The 'Start' attribute alters the numbering sequence and can change the starting value of list items[cite: 37]."
+        "explanation": "The 'Start' attribute alters the numbering sequence and can change the starting value of list items."
     },
     {
         "id": 112,
@@ -1453,7 +1479,7 @@
             "Type"
         ],
         "answerIndex": 2,
-        "explanation": "The 'Value' attribute changes the numbering sequence in the middle of an ordered list and is specified with the <li> tag[cite: 37]."
+        "explanation": "The 'Value' attribute changes the numbering sequence in the middle of an ordered list and is specified with the <li> tag."
     },
     {
         "id": 113,
@@ -1466,7 +1492,7 @@
             "Counting numbers (1, 2, 3...)"
         ],
         "answerIndex": 2,
-        "explanation": "Type='I' will give Uppercase Roman numbers (I, II, III...)[cite: 37]."
+        "explanation": "Type='I' will give Uppercase Roman numbers (I, II, III...)."
     },
     {
         "id": 114,
@@ -1479,7 +1505,7 @@
             "<UxL>"
         ],
         "answerIndex": 1,
-        "explanation": "An Unordered list starts with the tag <UL> and ends with </UL>[cite: 64]."
+        "explanation": "An Unordered list starts with the tag <UL> and ends with </UL>."
     },
     {
         "id": 115,
@@ -1492,7 +1518,7 @@
             "box"
         ],
         "answerIndex": 2,
-        "explanation": "Type='Square' will give a solid square to list items[cite: 66]."
+        "explanation": "Type='Square' will give a solid square to list items."
     },
     {
         "id": 116,
@@ -1505,7 +1531,7 @@
             "Asterisk"
         ],
         "answerIndex": 1,
-        "explanation": "Type='circle' will give an empty circle to list items[cite: 66]."
+        "explanation": "Type='circle' will give an empty circle to list items."
     },
     {
         "id": 117,
@@ -1518,7 +1544,7 @@
             "Complex List"
         ],
         "answerIndex": 2,
-        "explanation": "User can nest several lists to create a hierarchical structure; this is called a Nested List[cite: 92, 93]."
+        "explanation": "User can nest several lists to create a hierarchical structure; this is called a Nested List."
     },
     {
         "id": 118,
@@ -1531,7 +1557,7 @@
             "<DF>"
         ],
         "answerIndex": 0,
-        "explanation": "A Definition list always appears within <DL> & </DL> tags[cite: 130]."
+        "explanation": "A Definition list always appears within <DL> & </DL> tags."
     },
     {
         "id": 119,
@@ -1544,7 +1570,7 @@
             "<HD>"
         ],
         "answerIndex": 2,
-        "explanation": "The <DT> tag gives the definition term, meaning the topic name or heading name[cite: 132]."
+        "explanation": "The <DT> tag gives the definition term, meaning the topic name or heading name."
     },
     {
         "id": 120,
@@ -1557,7 +1583,7 @@
             "<DL>"
         ],
         "answerIndex": 1,
-        "explanation": "The <DD> tag gives the definition description or details of the heading topic mentioned in <DT>[cite: 134]."
+        "explanation": "The <DD> tag gives the definition description or details of the heading topic mentioned in <DT>."
     },
     {
         "id": 121,
@@ -1570,7 +1596,7 @@
             "<GRAPHIC>"
         ],
         "answerIndex": 2,
-        "explanation": "Images can be inserted into a webpage by using the HTML tag <IMG>[cite: 177]."
+        "explanation": "Images can be inserted into a webpage by using the HTML tag <IMG>."
     },
     {
         "id": 122,
@@ -1583,7 +1609,7 @@
             "General Image Format"
         ],
         "answerIndex": 1,
-        "explanation": "GIF stands for Graphic Interchange Format[cite: 174]."
+        "explanation": "GIF stands for Graphic Interchange Format."
     },
     {
         "id": 123,
@@ -1596,7 +1622,7 @@
             "Joint Photo Graphic"
         ],
         "answerIndex": 1,
-        "explanation": "JPG stands for Joint Photographic Expert Group[cite: 175]."
+        "explanation": "JPG stands for Joint Photographic Expert Group."
     },
     {
         "id": 124,
@@ -1609,7 +1635,7 @@
             "Binary Map"
         ],
         "answerIndex": 2,
-        "explanation": "BMP stands for Bitmap[cite: 176]."
+        "explanation": "BMP stands for Bitmap."
     },
     {
         "id": 125,
@@ -1622,7 +1648,7 @@
             "LINK"
         ],
         "answerIndex": 2,
-        "explanation": "The SRC attribute defines the path or address of the Graphical file available on your machine which the user wants to display[cite: 179]."
+        "explanation": "The SRC attribute defines the path or address of the Graphical file available on your machine which the user wants to display."
     },
     {
         "id": 126,
@@ -1635,7 +1661,7 @@
             "Tip"
         ],
         "answerIndex": 1,
-        "explanation": "The Alt attribute indicates the text to be displayed when the user moves the cursor on the Image; it displays at the bottom of the cursor like a tooltip[cite: 179]."
+        "explanation": "The Alt attribute indicates the text to be displayed when the user moves the cursor on the Image; it displays at the bottom of the cursor like a tooltip."
     },
     {
         "id": 127,
@@ -1648,7 +1674,7 @@
             "Top"
         ],
         "answerIndex": 2,
-        "explanation": "By default, Image will always be displayed at the Left side of the webpage[cite: 179]."
+        "explanation": "By default, Image will always be displayed at the Left side of the webpage."
     },
     {
         "id": 128,
@@ -1661,7 +1687,7 @@
             "North, South, East"
         ],
         "answerIndex": 1,
-        "explanation": "Top, Middle, and Bottom specify the alignment of the text after the Image tag according to Image position[cite: 179]."
+        "explanation": "Top, Middle, and Bottom specify the alignment of the text after the Image tag according to Image position."
     },
     {
         "id": 129,
@@ -1674,7 +1700,7 @@
             "Left of the Image"
         ],
         "answerIndex": 0,
-        "explanation": "By default, text will always be displayed at the Top of the Image[cite: 179]."
+        "explanation": "By default, text will always be displayed at the Top of the Image."
     },
     {
         "id": 130,
@@ -1687,7 +1713,7 @@
             "Padding"
         ],
         "answerIndex": 2,
-        "explanation": "Hspace (Horizontal Space) defines the amount of space to Left & Right of the image[cite: 179]."
+        "explanation": "Hspace (Horizontal Space) defines the amount of space to Left & Right of the image."
     },
     {
         "id": 131,
@@ -1700,7 +1726,7 @@
             "Border"
         ],
         "answerIndex": 0,
-        "explanation": "Vspace (Vertical space) defines the amount of space to Top & Bottom of the image[cite: 179]."
+        "explanation": "Vspace (Vertical space) defines the amount of space to Top & Bottom of the image."
     },
     {
         "id": 132,
@@ -1713,7 +1739,7 @@
             "Outline"
         ],
         "answerIndex": 2,
-        "explanation": "The Border attribute defines whether a border is assigned to the Image or not[cite: 179]."
+        "explanation": "The Border attribute defines whether a border is assigned to the Image or not."
     },
     {
         "id": 133,
@@ -1726,7 +1752,7 @@
             "i, ii, iii..."
         ],
         "answerIndex": 2,
-        "explanation": "Type='a' will give Lowercase letters (a,b,c...)[cite: 37]."
+        "explanation": "Type='a' will give Lowercase letters (a,b,c...)."
     },
     {
         "id": 134,
@@ -1739,7 +1765,7 @@
             "Numbering"
         ],
         "answerIndex": 2,
-        "explanation": "Type 'filled circle' or 'disc' will give a solid circle or bullet to list items[cite: 66]."
+        "explanation": "Type 'filled circle' or 'disc' will give a solid circle or bullet to list items."
     },
     {
         "id": 135,
@@ -1752,7 +1778,7 @@
             "Sequential List"
         ],
         "answerIndex": 1,
-        "explanation": "Bulleted or Unnumbered (Symbolic / Non-Sequential) refers to the Unordered List (UL)[cite: 27, 30]."
+        "explanation": "Bulleted or Unnumbered (Symbolic / Non-Sequential) refers to the Unordered List (UL)."
     },
     {
         "id": 136,
@@ -1765,7 +1791,7 @@
             "Nested List"
         ],
         "answerIndex": 2,
-        "explanation": "Numbered (Sequential) refers to the Ordered List (OL)[cite: 28, 31]."
+        "explanation": "Numbered (Sequential) refers to the Ordered List (OL)."
     },
     {
         "id": 137,
@@ -1778,7 +1804,7 @@
             "Percentage"
         ],
         "answerIndex": 2,
-        "explanation": "Although implicit in standard HTML, the provided text says these attributes specify the size of the image, and standard usage (often implied in such texts) is pixels. The text specifically lists Width and Height as attributes to specify size[cite: 179]."
+        "explanation": "Although implicit in standard HTML, the provided text says these attributes specify the size of the image, and standard usage (often implied in such texts) is pixels. The text specifically lists Width and Height as attributes to specify size."
     },
     {
         "id": 138,
@@ -1791,7 +1817,7 @@
             "The text will disappear"
         ],
         "answerIndex": 1,
-        "explanation": "If you forgot one of them, the list structure will be incorrect according to the browser[cite: 96]."
+        "explanation": "If you forgot one of them, the list structure will be incorrect according to the browser."
     },
     {
         "id": 139,
@@ -1804,7 +1830,7 @@
             "Bullet points"
         ],
         "answerIndex": 2,
-        "explanation": "Definition lists print the data in key and description format[cite: 127]."
+        "explanation": "Definition lists print the data in key and description format."
     },
     {
         "id": 140,
@@ -1817,7 +1843,7 @@
             "PSD"
         ],
         "answerIndex": 3,
-        "explanation": "The text lists GIF, JPG, and BMP as standard graphical files for browsers. PSD is not mentioned[cite: 174, 175, 176]."
+        "explanation": "The text lists GIF, JPG, and BMP as standard graphical files for browsers. PSD is not mentioned."
     },
     {
         "id": 141,
@@ -1830,7 +1856,7 @@
             "To execute code"
         ],
         "answerIndex": 1,
-        "explanation": "The image makes the information much more attractive because 'A picture is the meaning of thousand words'[cite: 171]."
+        "explanation": "The image makes the information much more attractive because 'A picture is the meaning of thousand words'."
     },
     {
         "id": 142,
@@ -1843,7 +1869,7 @@
             "To display images"
         ],
         "answerIndex": 1,
-        "explanation": "User can nest several lists to create hierarchical structure[cite: 93]."
+        "explanation": "User can nest several lists to create hierarchical structure."
     },
     {
         "id": 143,
@@ -1856,7 +1882,7 @@
             "Begin"
         ],
         "answerIndex": 2,
-        "explanation": "The 'Start' attribute alters the numbering sequence and can change the starting value of list items[cite: 37]."
+        "explanation": "The 'Start' attribute alters the numbering sequence and can change the starting value of list items."
     },
     {
         "id": 144,
@@ -1869,7 +1895,7 @@
             "A collection of images arranged in a grid"
         ],
         "answerIndex": 1,
-        "explanation": "An imagemap is a realistic picture where a client can tap on various pieces of the picture and be coordinated to various objects[cite: 19]."
+        "explanation": "An imagemap is a realistic picture where a client can tap on various pieces of the picture and be coordinated to various objects."
     },
     {
         "id": 145,
@@ -1882,7 +1908,7 @@
             "The screen resolution"
         ],
         "answerIndex": 2,
-        "explanation": "Imagemaps are made by characterizing every one of the hot zones regarding their x and y coordinates (comparative with the upper left-hand corner)[cite: 20]."
+        "explanation": "Imagemaps are made by characterizing every one of the hot zones regarding their x and y coordinates (comparative with the upper left-hand corner)."
     },
     {
         "id": 146,
@@ -1895,7 +1921,7 @@
             "<zone>"
         ],
         "answerIndex": 1,
-        "explanation": "The HTML <map> tag characterizes an image map[cite: 25]."
+        "explanation": "The HTML <map> tag characterizes an image map."
     },
     {
         "id": 147,
@@ -1908,7 +1934,7 @@
             "<region>"
         ],
         "answerIndex": 2,
-        "explanation": "The zones are characterized with at least one <area> tag[cite: 26]."
+        "explanation": "The zones are characterized with at least one <area> tag."
     },
     {
         "id": 148,
@@ -1921,7 +1947,7 @@
             "mapname"
         ],
         "answerIndex": 2,
-        "explanation": "The only difference from other images is that you must add a usemap attribute[cite: 31]."
+        "explanation": "The only difference from other images is that you must add a usemap attribute."
     },
     {
         "id": 149,
@@ -1934,7 +1960,7 @@
             "&"
         ],
         "answerIndex": 1,
-        "explanation": "The usemap esteem begins with a hash tag # followed by the name of the image map[cite: 32]."
+        "explanation": "The usemap esteem begins with a hash tag # followed by the name of the image map."
     },
     {
         "id": 150,
@@ -1947,7 +1973,7 @@
             "name"
         ],
         "answerIndex": 3,
-        "explanation": "The <map> component is connected to the image by utilizing the necessary name attribute[cite: 37]."
+        "explanation": "The <map> component is connected to the image by utilizing the necessary name attribute."
     },
     {
         "id": 151,
@@ -1960,7 +1986,7 @@
             "polygon"
         ],
         "answerIndex": 1,
-        "explanation": "`rect` defines a rectangular region[cite: 44]."
+        "explanation": "`rect` defines a rectangular region."
     },
     {
         "id": 152,
@@ -1973,7 +1999,7 @@
             "Width and height only"
         ],
         "answerIndex": 1,
-        "explanation": "The coordinates for shape=\"rect\" come in pairs, one for the x-axis and one for the y-axis[cite: 44]."
+        "explanation": "The coordinates for shape=\"rect\" come in pairs, one for the x-axis and one for the y-axis."
     },
     {
         "id": 153,
@@ -1986,7 +2012,7 @@
             "default"
         ],
         "answerIndex": 2,
-        "explanation": "`poly` defines a polygonal region... which creates a shape formed with straight lines (a polygon)[cite: 44]."
+        "explanation": "`poly` defines a polygonal region... which creates a shape formed with straight lines (a polygon)."
     },
     {
         "id": 154,
@@ -1999,7 +2025,7 @@
             "No region"
         ],
         "answerIndex": 1,
-        "explanation": "`default` - defines the entire region[cite: 44]."
+        "explanation": "`default` - defines the entire region."
     },
     {
         "id": 155,
@@ -2012,7 +2038,7 @@
             "<grid>"
         ],
         "answerIndex": 0,
-        "explanation": "The Table tag (<table>) is used for creating a table[cite: 74]."
+        "explanation": "The Table tag (<table>) is used for creating a table."
     },
     {
         "id": 156,
@@ -2025,7 +2051,7 @@
             "<TC>"
         ],
         "answerIndex": 2,
-        "explanation": "Each row of a table is described between <TR>&</TR> tag[cite: 75]."
+        "explanation": "Each row of a table is described between <TR>&</TR> tag."
     },
     {
         "id": 157,
@@ -2038,7 +2064,7 @@
             "<TRH>"
         ],
         "answerIndex": 1,
-        "explanation": "A table header row is define using <TH>&</TH>[cite: 76]."
+        "explanation": "A table header row is define using <TH>&</TH>."
     },
     {
         "id": 158,
@@ -2051,7 +2077,7 @@
             "Justified and normal"
         ],
         "answerIndex": 1,
-        "explanation": "The contents of a table header row is automatically central & bold in face[cite: 77]."
+        "explanation": "The contents of a table header row is automatically central & bold in face."
     },
     {
         "id": 159,
@@ -2064,7 +2090,7 @@
             "<TC>"
         ],
         "answerIndex": 2,
-        "explanation": "Each column is defined by <TD>&</TD> tag[cite: 79]."
+        "explanation": "Each column is defined by <TD>&</TD> tag."
     },
     {
         "id": 160,
@@ -2077,7 +2103,7 @@
             "<label>"
         ],
         "answerIndex": 2,
-        "explanation": "Caption can be provided to a table using <caption>&</caption>[cite: 82]."
+        "explanation": "Caption can be provided to a table using <caption>&</caption>."
     },
     {
         "id": 161,
@@ -2090,7 +2116,7 @@
             "Right of the table"
         ],
         "answerIndex": 2,
-        "explanation": "It has two values Top & bottom by default it is displayed at Top of the table[cite: 84]."
+        "explanation": "It has two values Top & bottom by default it is displayed at Top of the table."
     },
     {
         "id": 162,
@@ -2103,7 +2129,7 @@
             "justify"
         ],
         "answerIndex": 1,
-        "explanation": "Horizontal alignment of a table is control by align attribute[cite: 86]."
+        "explanation": "Horizontal alignment of a table is control by align attribute."
     },
     {
         "id": 163,
@@ -2116,7 +2142,7 @@
             "In points"
         ],
         "answerIndex": 2,
-        "explanation": "The border thickness is specified in pixels[cite: 86]."
+        "explanation": "The border thickness is specified in pixels."
     },
     {
         "id": 164,
@@ -2129,7 +2155,7 @@
             "margin"
         ],
         "answerIndex": 1,
-        "explanation": "Cellspacing: This attribute controls the distance between two adjacent cells[cite: 86]."
+        "explanation": "Cellspacing: This attribute controls the distance between two adjacent cells."
     },
     {
         "id": 165,
@@ -2142,7 +2168,7 @@
             "align"
         ],
         "answerIndex": 2,
-        "explanation": "Cellpadding: This attribute controls the distance between data in a cell & a boundary of a cell[cite: 86]."
+        "explanation": "Cellpadding: This attribute controls the distance between data in a cell & a boundary of a cell."
     },
     {
         "id": 166,
@@ -2155,7 +2181,7 @@
             "Sets the header row text"
         ],
         "answerIndex": 2,
-        "explanation": "The message in title attribute will display at bottom of the cursor when cursor moves & place on a table[cite: 86]."
+        "explanation": "The message in title attribute will display at bottom of the cursor when cursor moves & place on a table."
     },
     {
         "id": 167,
@@ -2168,7 +2194,7 @@
             "colwidth"
         ],
         "answerIndex": 1,
-        "explanation": "Colspan is used inside a <TH> tag to give the instruction to the browser to make a cell define by the tag[cite: 94]. It sets the number of columns that user want to set[cite: 95]."
+        "explanation": "Colspan is used inside a <TH> tag to give the instruction to the browser to make a cell define by the tag. It sets the number of columns that user want to set."
     },
     {
         "id": 168,
@@ -2181,7 +2207,7 @@
             "rowmerge"
         ],
         "answerIndex": 1,
-        "explanation": "Rowspan it works in a same way as the colspan except that it allows a cell to take more than one row[cite: 148]."
+        "explanation": "Rowspan it works in a same way as the colspan except that it allows a cell to take more than one row."
     },
     {
         "id": 169,
@@ -2194,7 +2220,7 @@
             "Centimeters"
         ],
         "answerIndex": 2,
-        "explanation": "It defines with values in percentage format. Eg.-<table width=50%>[cite: 86]."
+        "explanation": "It defines with values in percentage format. Eg.-<table width=50%>."
     },
     {
         "id": 170,
@@ -2207,7 +2233,7 @@
             "background"
         ],
         "answerIndex": 2,
-        "explanation": "Bgcolor: If this specified, background color of the whole table[cite: 86]."
+        "explanation": "Bgcolor: If this specified, background color of the whole table."
     },
     {
         "id": 171,
@@ -2220,7 +2246,7 @@
             "wallpaper"
         ],
         "answerIndex": 2,
-        "explanation": "Background: It specifies any graphical picture that user want to assign as a background of the table[cite: 86]."
+        "explanation": "Background: It specifies any graphical picture that user want to assign as a background of the table."
     },
     {
         "id": 172,
@@ -2233,7 +2259,7 @@
             "An error message"
         ],
         "answerIndex": 2,
-        "explanation": "If user can not specify this attribute then browser will display all the table row & column without borders[cite: 86]."
+        "explanation": "If user can not specify this attribute then browser will display all the table row & column without borders."
     },
     {
         "id": 173,
@@ -2246,7 +2272,7 @@
             "The square area around it"
         ],
         "answerIndex": 2,
-        "explanation": "To add a circle area, first locate the coordinates of the center of the circle[cite: 44]."
+        "explanation": "To add a circle area, first locate the coordinates of the center of the circle."
     },
     {
         "id": 174,
@@ -2259,7 +2285,7 @@
             "The color of the caption"
         ],
         "answerIndex": 2,
-        "explanation": "If user can specify the border attribute then it also specify the border color using border color attribute[cite: 86]."
+        "explanation": "If user can specify the border attribute then it also specify the border color using border color attribute."
     },
     {
         "id": 175,
@@ -2663,7 +2689,7 @@
         ],
         "answerIndex": 1,
         "explanation": "It sets the width of a table as compare to width of the webpage."
-    },
+   },
     {
         "id": 206,
         "chapter": 6,
@@ -3130,7 +3156,7 @@
             "IBM and Oracle"
         ],
         "answerIndex": 1,
-        "explanation": "HTML5 is a participation between the World Wide Web Consortium (W3C) and the Web Hypertext Application Technology Working Group (WHATWG)[cite: 249]."
+        "explanation": "HTML5 is a participation between the World Wide Web Consortium (W3C) and the Web Hypertext Application Technology Working Group (WHATWG)."
     },
     {
         "id": 242,
@@ -3143,7 +3169,7 @@
             "SGML"
         ],
         "answerIndex": 1,
-        "explanation": "HTML5 is the following significant amendment of the HTML standard supplanting HTML 4.01, XHTML 1.0, and XHTML 1.1[cite: 248]."
+        "explanation": "HTML5 is the following significant amendment of the HTML standard supplanting HTML 4.01, XHTML 1.0, and XHTML 1.1."
     },
     {
         "id": 243,
@@ -3156,7 +3182,7 @@
             "<!DOCTYPE root>"
         ],
         "answerIndex": 2,
-        "explanation": "HTML 5 creators would utilize basic grammar to determine DOCTYPE as follows <!DOCTYPE html>[cite: 260]."
+        "explanation": "HTML 5 creators would utilize basic grammar to determine DOCTYPE as follows <!DOCTYPE html>."
     },
     {
         "id": 244,
@@ -3169,7 +3195,7 @@
             "<figure>"
         ],
         "answerIndex": 2,
-        "explanation": "The <article> tag addresses an autonomous piece of substance of a report, like a blog section or paper article[cite: 265]."
+        "explanation": "The <article> tag addresses an autonomous piece of substance of a report, like a blog section or paper article."
     },
     {
         "id": 245,
@@ -3182,7 +3208,7 @@
             "<footer>"
         ],
         "answerIndex": 1,
-        "explanation": "The <aside> tag addresses a piece of substance that is simply marginally identified with the remainder of the page[cite: 266]."
+        "explanation": "The <aside> tag addresses a piece of substance that is simply marginally identified with the remainder of the page."
     },
     {
         "id": 246,
@@ -3195,7 +3221,7 @@
             "<route>"
         ],
         "answerIndex": 1,
-        "explanation": "The <nav> tag addresses a segment of the record proposed for route[cite: 269]."
+        "explanation": "The <nav> tag addresses a segment of the record proposed for route."
     },
     {
         "id": 247,
@@ -3208,7 +3234,7 @@
             "To display a footer"
         ],
         "answerIndex": 1,
-        "explanation": "The <figure> tag can be used to relate an inscription along with some inserted content, like a realistic or video[cite: 271]."
+        "explanation": "The <figure> tag can be used to relate an inscription along with some inserted content, like a realistic or video."
     },
     {
         "id": 248,
@@ -3221,7 +3247,7 @@
             "onstart"
         ],
         "answerIndex": 1,
-        "explanation": "The 'onload' event executes when the document has finished loading[cite: 317]."
+        "explanation": "The 'onload' event executes when the document has finished loading."
     },
     {
         "id": 249,
@@ -3234,7 +3260,7 @@
             "onscale"
         ],
         "answerIndex": 1,
-        "explanation": "The 'onresize' event executes when the browser window is resized[cite: 317]."
+        "explanation": "The 'onresize' event executes when the browser window is resized."
     },
     {
         "id": 250,
@@ -3247,7 +3273,7 @@
             "onclose"
         ],
         "answerIndex": 0,
-        "explanation": "The 'onoffline' event executes when the network connection fails and the browser starts working offline[cite: 317]."
+        "explanation": "The 'onoffline' event executes when the network connection fails and the browser starts working offline."
     },
     {
         "id": 251,
@@ -3260,7 +3286,7 @@
             "oninput"
         ],
         "answerIndex": 1,
-        "explanation": "The 'onblur' event executes when an element loses focus[cite: 319]."
+        "explanation": "The 'onblur' event executes when an element loses focus."
     },
     {
         "id": 252,
@@ -3273,7 +3299,7 @@
             "onsearch"
         ],
         "answerIndex": 1,
-        "explanation": "The 'onchange' event executes when the value or state of the element is changed[cite: 319]."
+        "explanation": "The 'onchange' event executes when the value or state of the element is changed."
     },
     {
         "id": 253,
@@ -3286,7 +3312,7 @@
             "ontype"
         ],
         "answerIndex": 1,
-        "explanation": "The 'onkeydown' event executes when the user presses a key[cite: 322]."
+        "explanation": "The 'onkeydown' event executes when the user presses a key."
     },
     {
         "id": 254,
@@ -3299,7 +3325,7 @@
             "onmouseup"
         ],
         "answerIndex": 1,
-        "explanation": "The 'ondblclick' event executes when the user double-clicks on the element[cite: 324]."
+        "explanation": "The 'ondblclick' event executes when the user double-clicks on the element."
     },
     {
         "id": 255,
@@ -3312,7 +3338,7 @@
             "onoptions"
         ],
         "answerIndex": 1,
-        "explanation": "The 'oncontextmenu' event executes when a context menu is triggered by the user through right-click on the element[cite: 324]."
+        "explanation": "The 'oncontextmenu' event executes when a context menu is triggered by the user through right-click on the element."
     },
     {
         "id": 256,
@@ -3325,7 +3351,7 @@
             "ondragleave"
         ],
         "answerIndex": 2,
-        "explanation": "The 'ondrop' event executes when the mouse button is released during a drag-and-drop operation i.e. when dragged element is being dropped[cite: 324]."
+        "explanation": "The 'ondrop' event executes when the mouse button is released during a drag-and-drop operation i.e. when dragged element is being dropped."
     },
     {
         "id": 257,
@@ -3338,7 +3364,7 @@
             "selected"
         ],
         "answerIndex": 2,
-        "explanation": "The 'Autofocus' attribute specifies that an <input> element should automatically get focus when the page loads[cite: 334]."
+        "explanation": "The 'Autofocus' attribute specifies that an <input> element should automatically get focus when the page loads."
     },
     {
         "id": 258,
@@ -3351,7 +3377,7 @@
             "title"
         ],
         "answerIndex": 1,
-        "explanation": "The 'placeholder' attribute specifies a short hint that describes the expected value of an <input> element[cite: 334]."
+        "explanation": "The 'placeholder' attribute specifies a short hint that describes the expected value of an <input> element."
     },
     {
         "id": 259,
@@ -3364,7 +3390,7 @@
             "urgent"
         ],
         "answerIndex": 1,
-        "explanation": "The 'required' attribute specifies that an input field must be filled out before submitting the form[cite: 336]."
+        "explanation": "The 'required' attribute specifies that an input field must be filled out before submitting the form."
     },
     {
         "id": 260,
@@ -3377,7 +3403,7 @@
             "<canvas>"
         ],
         "answerIndex": 3,
-        "explanation": "The HTML <canvas> tag is utilized to draw graphics on a page[cite: 338]."
+        "explanation": "The HTML <canvas> tag is utilized to draw graphics on a page."
     },
     {
         "id": 261,
@@ -3390,7 +3416,7 @@
             "C++"
         ],
         "answerIndex": 1,
-        "explanation": "The HTML <canvas> component is utilized to draw graphics, on the fly, through JavaScript[cite: 341]."
+        "explanation": "The HTML <canvas> component is utilized to draw graphics, on the fly, through JavaScript."
     },
     {
         "id": 262,
@@ -3403,7 +3429,7 @@
             "3D border"
         ],
         "answerIndex": 1,
-        "explanation": "By default, a canvas has no border and no content[cite: 344]."
+        "explanation": "By default, a canvas has no border and no content."
     },
     {
         "id": 263,
@@ -3416,7 +3442,7 @@
             "<mp4>"
         ],
         "answerIndex": 2,
-        "explanation": "To add video file in web page we have to use <video> tag[cite: 355]."
+        "explanation": "To add video file in web page we have to use <video> tag."
     },
     {
         "id": 264,
@@ -3429,7 +3455,7 @@
             "settings"
         ],
         "answerIndex": 2,
-        "explanation": "The 'Controls' attribute adds video controls, like play, pause, and volume[cite: 357]."
+        "explanation": "The 'Controls' attribute adds video controls, like play, pause, and volume."
     },
     {
         "id": 265,
@@ -3442,7 +3468,7 @@
             "begin"
         ],
         "answerIndex": 1,
-        "explanation": "Autoplay attribute will play your video start playing automatically[cite: 357]."
+        "explanation": "Autoplay attribute will play your video start playing automatically."
     },
     {
         "id": 266,
@@ -3455,7 +3481,7 @@
             "src"
         ],
         "answerIndex": 1,
-        "explanation": "The 'Source' attribute allows you to specify alternative video files which the browser may choose from[cite: 357]."
+        "explanation": "The 'Source' attribute allows you to specify alternative video files which the browser may choose from."
     },
     {
         "id": 267,
@@ -3468,7 +3494,7 @@
             "no-sound"
         ],
         "answerIndex": 2,
-        "explanation": "The 'Muted' attribute will keep your video on mute mode[cite: 357]."
+        "explanation": "The 'Muted' attribute will keep your video on mute mode."
     },
     {
         "id": 268,
@@ -3481,7 +3507,7 @@
             "TIFF"
         ],
         "answerIndex": 3,
-        "explanation": "The supporting file formats listed for Video are MP4, WebM, MPEG, Ogg, and AVI[cite: 352]. TIFF is not listed."
+        "explanation": "The supporting file formats listed for Video are MP4, WebM, MPEG, Ogg, and AVI. TIFF is not listed."
     },
     {
         "id": 269,
@@ -3494,7 +3520,7 @@
             "onfind"
         ],
         "answerIndex": 2,
-        "explanation": "The 'onsearch' event executes when the user writes something in a search input field[cite: 319]."
+        "explanation": "The 'onsearch' event executes when the user writes something in a search input field."
     },
     {
         "id": 270,
@@ -3507,7 +3533,7 @@
             "<mp3>"
         ],
         "answerIndex": 1,
-        "explanation": "To add Audio file in web page we have to use <Audio> tag[cite: 376]."
+        "explanation": "To add Audio file in web page we have to use <Audio> tag."
     },
     {
         "id": 271,
@@ -3520,7 +3546,7 @@
             "rgb"
         ],
         "answerIndex": 1,
-        "explanation": "The table of input types lists 'color' as a valid type[cite: 334]."
+        "explanation": "The table of input types lists 'color' as a valid type."
     },
     {
         "id": 272,
@@ -3533,7 +3559,7 @@
             "year"
         ],
         "answerIndex": 2,
-        "explanation": "The table of input types lists 'date' as a valid type[cite: 334]."
+        "explanation": "The table of input types lists 'date' as a valid type."
     },
     {
         "id": 273,
@@ -3546,7 +3572,7 @@
             "on"
         ],
         "answerIndex": 2,
-        "explanation": "The 'checked' Boolean attribute specifies that the control is selected by default[cite: 336]."
+        "explanation": "The 'checked' Boolean attribute specifies that the control is selected by default."
     },
     {
         "id": 274,
@@ -3559,7 +3585,7 @@
             "ondragleave"
         ],
         "answerIndex": 1,
-        "explanation": "The 'ondragover' event executes when an element is being dragged over a valid drop target[cite: 324]."
+        "explanation": "The 'ondragover' event executes when an element is being dragged over a valid drop target."
     },
     {
         "id": 275,
@@ -3572,7 +3598,7 @@
             "onblur"
         ],
         "answerIndex": 1,
-        "explanation": "The 'onpagehide' event executes when the page is hidden, such as when a user is moving to another webpage[cite: 317]."
+        "explanation": "The 'onpagehide' event executes when the page is hidden, such as when a user is moving to another webpage."
     },
     {
         "id": 276,
@@ -3585,7 +3611,7 @@
             "<section>"
         ],
         "answerIndex": 2,
-        "explanation": "The <footer> tag addresses a footer for a segment and can contain data about the creator, copyright data, and so on[cite: 268]."
+        "explanation": "The <footer> tag addresses a footer for a segment and can contain data about the creator, copyright data, and so on."
     },
     {
         "id": 277,
@@ -3598,7 +3624,7 @@
             "onmove"
         ],
         "answerIndex": 1,
-        "explanation": "For 'onmousewheel', the text states: Use the onwheel attribute instead[cite: 325]."
+        "explanation": "For 'onmousewheel', the text states: Use the onwheel attribute instead."
     },
     {
         "id": 278,
@@ -3611,7 +3637,7 @@
             "Executes when the form is submitted"
         ],
         "answerIndex": 2,
-        "explanation": "The 'oninvalid' event executes when a submittable element does not satisfy their constraints during form validation[cite: 319]."
+        "explanation": "The 'oninvalid' event executes when a submittable element does not satisfy their constraints during form validation."
     },
     {
         "id": 279,
@@ -3624,7 +3650,7 @@
             "ondetail"
         ],
         "answerIndex": 2,
-        "explanation": "The 'ontoggle' event executes when the user opens or closes the <details> element[cite: 325]."
+        "explanation": "The 'ontoggle' event executes when the user opens or closes the <details> element."
     },
     {
         "id": 280,
@@ -3637,7 +3663,7 @@
             "address"
         ],
         "answerIndex": 2,
-        "explanation": "The table of input types lists 'email' as a valid type[cite: 334]."
+        "explanation": "The table of input types lists 'email' as a valid type."
     },
     {
         "id": 281,

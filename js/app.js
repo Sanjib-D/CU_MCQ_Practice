@@ -1,3 +1,14 @@
+// --- Helper: Prevent HTML code in data from breaking layout ---
+function escapeHTML(str) {
+    if (!str) return str;
+    return str.toString()
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
+
 let navHistory = [];
 let currentSelection = {
     stream: null,
@@ -7,8 +18,10 @@ let currentSelection = {
 
 document.addEventListener('DOMContentLoaded', () => {
     initTheme();
-    initStreamView();
-    checkDeepLink(); // Check URL on load
+    // FIX 1: Only load the default Home Stream view if checkDeepLink fails to find a route.
+    if (!checkDeepLink()) {
+        initStreamView();
+    }
 });
 
 // --- Deep Linking & URL Handling ---
@@ -25,14 +38,15 @@ function checkDeepLink() {
         const details = findSubjectByCode(subjectCode);
         if (details) {
             currentSelection = { stream: details.stream, semester: details.semester, subject: details.subject };
-            // Build fake history so Back button works naturally
+            
             navHistory = ['view-stream', 'view-semester'];
             if (details.semester.type === 'specialization') navHistory.push('view-specialization');
             else navHistory.push('view-subject');
             
-            navigateTo('view-action');
+            // FIX 2: Use forceView instead of navigateTo to prevent history corruption
+            forceView('view-action');
             document.getElementById('action-subject-title').innerText = currentSelection.subject.name;
-            return;
+            return true; // Successfully handled
         }
     }
 
@@ -48,35 +62,38 @@ function checkDeepLink() {
                 currentSelection.semester = foundSem;
 
                 // Case A: Specialization Selected (e.g. ?spec=0)
+                // Note: specIndex comes from URL as string, array access works with strings in JS
                 if (specIndex !== null && foundSem.groups && foundSem.groups[specIndex]) {
                     navHistory = ['view-stream', 'view-semester', 'view-specialization'];
-                    navigateTo('view-subject');
+                    forceView('view-subject'); // FIX 2
                     renderSubjects(foundSem.groups[specIndex].subjects);
+                    return true;
                 } 
                 // Case B: Semester Selected (Core or Spec List)
                 else {
                     navHistory = ['view-stream', 'view-semester'];
                     if (foundSem.type === 'specialization') {
-                        navigateTo('view-specialization');
+                        forceView('view-specialization'); // FIX 2
                         renderSpecializations();
                     } else {
-                        navigateTo('view-subject');
+                        forceView('view-subject'); // FIX 2
                         renderSubjects(foundSem.subjects);
                     }
+                    return true;
                 }
-            } else {
-                // Invalid Sem ID, fallback to Stream
-                navHistory = ['view-stream'];
-                navigateTo('view-semester');
-                renderSemesters();
-            }
-        } else {
-            // Just Stream Selected
-            navHistory = ['view-stream'];
-            navigateTo('view-semester');
-            renderSemesters();
+            } 
         }
     }
+    
+    // If we reached here, no valid deep link was found
+    return false;
+}
+
+// FIX 3: New Helper to set view directly without modifying navHistory logic
+function forceView(viewId) {
+    document.querySelectorAll('.view-section').forEach(el => el.classList.add('hidden'));
+    document.getElementById(viewId).classList.remove('hidden');
+    updateNavButtons();
 }
 
 function updateUrl(params) {
@@ -149,10 +166,6 @@ function goBack() {
     if (navHistory.length === 0) return;
     const previousViewId = navHistory.pop();
     
-    // Simple logic: If we go back, we just strip the last URL param or reset slightly.
-    // For simplicity in this static app, we won't strictly manipulate URL on back 
-    // to avoid complex state management, but the UI will navigate correctly.
-    
     document.querySelectorAll('.view-section').forEach(el => el.classList.add('hidden'));
     document.getElementById(previousViewId).classList.remove('hidden');
     updateNavButtons();
@@ -161,6 +174,7 @@ function goBack() {
 function updateNavButtons() {
     const backBtn = document.getElementById('back-btn');
     const homeBtn = document.getElementById('home-btn');
+    // Check if we are at root (Stream View is visible)
     const isRoot = document.getElementById('view-stream').classList.contains('hidden') === false;
 
     if (isRoot) {
@@ -198,7 +212,7 @@ function initStreamView() {
 
 function selectStream(stream) {
     currentSelection.stream = stream;
-    updateUrl({ stream: stream }); // Update URL
+    updateUrl({ stream: stream });
     navigateTo('view-semester');
     renderSemesters();
 }
@@ -219,7 +233,6 @@ function selectSemester(semId) {
     const semesters = syllabusData[currentSelection.stream].semesters;
     currentSelection.semester = semesters.find(s => s.id === semId);
 
-    // Update URL
     updateUrl({ 
         stream: currentSelection.stream, 
         semester: semId 
@@ -246,7 +259,6 @@ function renderSpecializations() {
 function selectSpecialization(index) {
     const group = currentSelection.semester.groups[index];
     
-    // Update URL
     updateUrl({ 
         stream: currentSelection.stream, 
         semester: currentSelection.semester.id, 
@@ -279,8 +291,6 @@ function selectSubject(code) {
     }
 
     currentSelection.subject = foundSub;
-    
-    // Update URL (Subject code is unique, so we just use that)
     updateUrl({ subject: code });
 
     navigateTo('view-action');
@@ -301,9 +311,9 @@ function viewSyllabus() {
 
     container.innerHTML = currentSelection.subject.syllabus.map(mod => `
         <div class="syllabus-module">
-            <h4>${mod.module}</h4>
+            <h4>${escapeHTML(mod.module)}</h4>
             <ul>
-                ${mod.topics.map(t => `<li>${t}</li>`).join('')}
+                ${mod.topics.map(t => `<li>${escapeHTML(t)}</li>`).join('')}
             </ul>
         </div>
     `).join('');
