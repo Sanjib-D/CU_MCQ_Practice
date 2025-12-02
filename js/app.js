@@ -5,11 +5,68 @@ let currentSelection = {
     subject: null
 };
 
-// --- Initialization ---
 document.addEventListener('DOMContentLoaded', () => {
-    initTheme(); // Load saved theme preference
+    initTheme();
     initStreamView();
+    // Check if the URL has a link to a specific subject
+    checkDeepLink(); 
 });
+
+// --- Deep Linking (URL Handling) ---
+
+function checkDeepLink() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const subjectCode = urlParams.get('subject');
+
+    if (subjectCode) {
+        const details = findSubjectByCode(subjectCode);
+        if (details) {
+            currentSelection = {
+                stream: details.stream,
+                semester: details.semester,
+                subject: details.subject
+            };
+            
+            // Navigate directly to the subject view
+            navigateTo('view-action');
+            document.getElementById('action-subject-title').innerText = currentSelection.subject.name;
+
+            // Fake the history so the Back button works
+            navHistory = ['view-stream']; 
+            updateNavButtons();
+        } else {
+            // Invalid code in URL, clean it up
+            resetUrl();
+        }
+    }
+}
+
+// Helper to find a subject deeply nested in the data
+function findSubjectByCode(code) {
+    for (const streamKey in syllabusData) {
+        const stream = syllabusData[streamKey];
+        for (const semester of stream.semesters) {
+            // Check core subjects
+            if (semester.subjects) {
+                const sub = semester.subjects.find(s => s.code === code);
+                if (sub) return { stream: streamKey, semester: semester, subject: sub };
+            }
+            // Check specialization groups
+            if (semester.groups) {
+                for (const group of semester.groups) {
+                    const sub = group.subjects.find(s => s.code === code);
+                    if (sub) return { stream: streamKey, semester: semester, subject: sub };
+                }
+            }
+        }
+    }
+    return null;
+}
+
+function resetUrl() {
+    const newUrl = window.location.pathname;
+    window.history.pushState({}, '', newUrl);
+}
 
 // --- Theme Logic ---
 function initTheme() {
@@ -17,7 +74,6 @@ function initTheme() {
     const storedTheme = localStorage.getItem('theme');
     const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
-    // Apply dark mode if stored or if system prefers it (and no storage)
     if (storedTheme === 'dark' || (!storedTheme && systemDark)) {
         document.body.classList.add('dark-mode');
         themeBtn.innerText = '☀️';
@@ -25,17 +81,15 @@ function initTheme() {
         themeBtn.innerText = '🌙';
     }
 
-    // Toggle Click Event
     themeBtn.addEventListener('click', () => {
         document.body.classList.toggle('dark-mode');
         const isDark = document.body.classList.contains('dark-mode');
-
         themeBtn.innerText = isDark ? '☀️' : '🌙';
         localStorage.setItem('theme', isDark ? 'dark' : 'light');
     });
 }
 
-// --- Navigation Logic (History Manager) ---
+// --- Navigation Logic ---
 function navigateTo(viewId) {
     const currentView = document.querySelector('.view-section:not(.hidden)');
     if (currentView) {
@@ -44,7 +98,7 @@ function navigateTo(viewId) {
 
     document.querySelectorAll('.view-section').forEach(el => el.classList.add('hidden'));
     document.getElementById(viewId).classList.remove('hidden');
-
+    
     updateNavButtons();
     window.scrollTo(0, 0);
 }
@@ -66,6 +120,7 @@ function updateNavButtons() {
         backBtn.classList.add('hidden');
         homeBtn.classList.add('hidden');
         navHistory = [];
+        resetUrl(); // Clear URL when at home/root
     } else {
         backBtn.classList.remove('hidden');
         homeBtn.classList.remove('hidden');
@@ -75,6 +130,7 @@ function updateNavButtons() {
 function resetApp() {
     navHistory = [];
     currentSelection = { stream: null, semester: null, subject: null };
+    resetUrl(); // Clear URL on reset
     initStreamView();
 }
 
@@ -151,6 +207,8 @@ function renderSubjects(subjects) {
 
 function selectSubject(code) {
     let foundSub = null;
+    
+    // Logic to find subject object from current selection
     if (currentSelection.semester.type === 'core') {
         foundSub = currentSelection.semester.subjects.find(s => s.code === code);
     } else {
@@ -161,6 +219,11 @@ function selectSubject(code) {
     }
 
     currentSelection.subject = foundSub;
+    
+    // UPDATE URL: Add the subject code to the URL
+    const newUrl = `${window.location.pathname}?subject=${code}`;
+    window.history.pushState({ path: newUrl }, '', newUrl);
+
     navigateTo('view-action');
     document.getElementById('action-subject-title').innerText = currentSelection.subject.name;
 }
