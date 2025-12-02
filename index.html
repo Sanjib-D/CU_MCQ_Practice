@@ -86,8 +86,11 @@
             <div class="question-box">
                 <h3 id="question-text">Loading...</h3>
                 <div id="options-container" class="options-grid"></div>
+                
+                <div id="quiz-explanation" class="summary-explanation hidden" style="margin-top: 20px;"></div>
             </div>
             <div class="quiz-footer">
+                <button id="prev-btn" class="secondary-btn hidden" onclick="prevQuestion()">Previous</button>
                 <button id="next-btn" class="primary-btn" onclick="nextQuestion()">Next Question</button>
                 <button id="submit-btn" class="success-btn hidden" onclick="submitQuiz()">Submit Test</button>
             </div>

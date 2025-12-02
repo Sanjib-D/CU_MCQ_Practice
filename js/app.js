@@ -8,50 +8,99 @@ let currentSelection = {
 document.addEventListener('DOMContentLoaded', () => {
     initTheme();
     initStreamView();
-    // Check if the URL has a link to a specific subject
-    checkDeepLink(); 
+    checkDeepLink(); // Check URL on load
 });
 
-// --- Deep Linking (URL Handling) ---
+// --- Deep Linking & URL Handling ---
 
 function checkDeepLink() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const subjectCode = urlParams.get('subject');
+    const params = new URLSearchParams(window.location.search);
+    const subjectCode = params.get('subject');
+    const streamName = params.get('stream');
+    const semId = params.get('semester');
+    const specIndex = params.get('spec');
 
+    // 1. Priority: Direct Subject Link (e.g., ?subject=24ONMCH604)
     if (subjectCode) {
         const details = findSubjectByCode(subjectCode);
         if (details) {
-            currentSelection = {
-                stream: details.stream,
-                semester: details.semester,
-                subject: details.subject
-            };
+            currentSelection = { stream: details.stream, semester: details.semester, subject: details.subject };
+            // Build fake history so Back button works naturally
+            navHistory = ['view-stream', 'view-semester'];
+            if (details.semester.type === 'specialization') navHistory.push('view-specialization');
+            else navHistory.push('view-subject');
             
-            // Navigate directly to the subject view
             navigateTo('view-action');
             document.getElementById('action-subject-title').innerText = currentSelection.subject.name;
+            return;
+        }
+    }
 
-            // Fake the history so the Back button works
-            navHistory = ['view-stream']; 
-            updateNavButtons();
+    // 2. Hierarchy Link (e.g., ?stream=MCA&semester=sem3&spec=0)
+    if (streamName && syllabusData[streamName]) {
+        currentSelection.stream = streamName;
+
+        if (semId) {
+            const semesters = syllabusData[streamName].semesters;
+            const foundSem = semesters.find(s => s.id === semId);
+
+            if (foundSem) {
+                currentSelection.semester = foundSem;
+
+                // Case A: Specialization Selected (e.g. ?spec=0)
+                if (specIndex !== null && foundSem.groups && foundSem.groups[specIndex]) {
+                    navHistory = ['view-stream', 'view-semester', 'view-specialization'];
+                    navigateTo('view-subject');
+                    renderSubjects(foundSem.groups[specIndex].subjects);
+                } 
+                // Case B: Semester Selected (Core or Spec List)
+                else {
+                    navHistory = ['view-stream', 'view-semester'];
+                    if (foundSem.type === 'specialization') {
+                        navigateTo('view-specialization');
+                        renderSpecializations();
+                    } else {
+                        navigateTo('view-subject');
+                        renderSubjects(foundSem.subjects);
+                    }
+                }
+            } else {
+                // Invalid Sem ID, fallback to Stream
+                navHistory = ['view-stream'];
+                navigateTo('view-semester');
+                renderSemesters();
+            }
         } else {
-            // Invalid code in URL, clean it up
-            resetUrl();
+            // Just Stream Selected
+            navHistory = ['view-stream'];
+            navigateTo('view-semester');
+            renderSemesters();
         }
     }
 }
 
-// Helper to find a subject deeply nested in the data
+function updateUrl(params) {
+    const url = new URL(window.location);
+    url.search = ''; // Clear existing params
+    Object.keys(params).forEach(key => url.searchParams.set(key, params[key]));
+    window.history.pushState({}, '', url);
+}
+
+function resetUrl() {
+    const url = new URL(window.location);
+    url.search = '';
+    window.history.pushState({}, '', url);
+}
+
+// Helper: Find subject anywhere in data
 function findSubjectByCode(code) {
     for (const streamKey in syllabusData) {
         const stream = syllabusData[streamKey];
         for (const semester of stream.semesters) {
-            // Check core subjects
             if (semester.subjects) {
                 const sub = semester.subjects.find(s => s.code === code);
                 if (sub) return { stream: streamKey, semester: semester, subject: sub };
             }
-            // Check specialization groups
             if (semester.groups) {
                 for (const group of semester.groups) {
                     const sub = group.subjects.find(s => s.code === code);
@@ -61,11 +110,6 @@ function findSubjectByCode(code) {
         }
     }
     return null;
-}
-
-function resetUrl() {
-    const newUrl = window.location.pathname;
-    window.history.pushState({}, '', newUrl);
 }
 
 // --- Theme Logic ---
@@ -92,9 +136,7 @@ function initTheme() {
 // --- Navigation Logic ---
 function navigateTo(viewId) {
     const currentView = document.querySelector('.view-section:not(.hidden)');
-    if (currentView) {
-        navHistory.push(currentView.id);
-    }
+    if (currentView) navHistory.push(currentView.id);
 
     document.querySelectorAll('.view-section').forEach(el => el.classList.add('hidden'));
     document.getElementById(viewId).classList.remove('hidden');
@@ -106,6 +148,11 @@ function navigateTo(viewId) {
 function goBack() {
     if (navHistory.length === 0) return;
     const previousViewId = navHistory.pop();
+    
+    // Simple logic: If we go back, we just strip the last URL param or reset slightly.
+    // For simplicity in this static app, we won't strictly manipulate URL on back 
+    // to avoid complex state management, but the UI will navigate correctly.
+    
     document.querySelectorAll('.view-section').forEach(el => el.classList.add('hidden'));
     document.getElementById(previousViewId).classList.remove('hidden');
     updateNavButtons();
@@ -120,7 +167,7 @@ function updateNavButtons() {
         backBtn.classList.add('hidden');
         homeBtn.classList.add('hidden');
         navHistory = [];
-        resetUrl(); // Clear URL when at home/root
+        resetUrl(); 
     } else {
         backBtn.classList.remove('hidden');
         homeBtn.classList.remove('hidden');
@@ -130,7 +177,7 @@ function updateNavButtons() {
 function resetApp() {
     navHistory = [];
     currentSelection = { stream: null, semester: null, subject: null };
-    resetUrl(); // Clear URL on reset
+    resetUrl();
     initStreamView();
 }
 
@@ -151,6 +198,7 @@ function initStreamView() {
 
 function selectStream(stream) {
     currentSelection.stream = stream;
+    updateUrl({ stream: stream }); // Update URL
     navigateTo('view-semester');
     renderSemesters();
 }
@@ -170,6 +218,12 @@ function renderSemesters() {
 function selectSemester(semId) {
     const semesters = syllabusData[currentSelection.stream].semesters;
     currentSelection.semester = semesters.find(s => s.id === semId);
+
+    // Update URL
+    updateUrl({ 
+        stream: currentSelection.stream, 
+        semester: semId 
+    });
 
     if (currentSelection.semester.type === 'specialization') {
         navigateTo('view-specialization');
@@ -191,6 +245,14 @@ function renderSpecializations() {
 
 function selectSpecialization(index) {
     const group = currentSelection.semester.groups[index];
+    
+    // Update URL
+    updateUrl({ 
+        stream: currentSelection.stream, 
+        semester: currentSelection.semester.id, 
+        spec: index 
+    });
+
     navigateTo('view-subject');
     renderSubjects(group.subjects);
 }
@@ -207,8 +269,6 @@ function renderSubjects(subjects) {
 
 function selectSubject(code) {
     let foundSub = null;
-    
-    // Logic to find subject object from current selection
     if (currentSelection.semester.type === 'core') {
         foundSub = currentSelection.semester.subjects.find(s => s.code === code);
     } else {
@@ -220,9 +280,8 @@ function selectSubject(code) {
 
     currentSelection.subject = foundSub;
     
-    // UPDATE URL: Add the subject code to the URL
-    const newUrl = `${window.location.pathname}?subject=${code}`;
-    window.history.pushState({ path: newUrl }, '', newUrl);
+    // Update URL (Subject code is unique, so we just use that)
+    updateUrl({ subject: code });
 
     navigateTo('view-action');
     document.getElementById('action-subject-title').innerText = currentSelection.subject.name;

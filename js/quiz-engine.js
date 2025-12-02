@@ -2,7 +2,13 @@ let allQuestions = [];
 let activeQuestions = [];
 let currentQuestionIndex = 0;
 let userAnswers = [];
+let quizSubMode = 'standard'; // 'standard' (End) or 'immediate' (Every Question)
 
+// Timer Variables
+let timerInterval;
+let startTime;
+
+// --- 1. Fetch Data & Show Chapters ---
 async function initChapterSelection(subjectCode) {
     try {
         const response = await fetch(`data/${subjectCode}.json`);
@@ -10,6 +16,9 @@ async function initChapterSelection(subjectCode) {
 
         allQuestions = await response.json();
         const chapters = [...new Set(allQuestions.map(q => q.chapter))].sort((a, b) => a - b);
+
+        // Default to standard when entering selection
+        quizSubMode = 'standard';
         renderChapters(chapters);
     } catch (error) {
         alert("Data not found for this subject. Please ensure the JSON file exists in /data folder.");
@@ -23,7 +32,23 @@ function renderChapters(chapters) {
     const modeLabel = currentSelection.mode === 'quiz' ? 'Test' : 'Summary';
     const cardClass = currentSelection.mode === 'quiz' ? 'practice-card-bg' : 'summary-card-bg';
 
-    let html = `<div class="card action-card ${cardClass}" onclick="handleModuleSelect('all')">
+    let html = '';
+
+    // --- NEW: Mode Selector (Only for Quiz) ---
+    if (currentSelection.mode === 'quiz') {
+        html += `
+        <div class="summary-controls" style="margin-bottom: 25px;">
+            <button class="toggle-btn ${quizSubMode === 'standard' ? 'active' : ''}" onclick="setQuizSubMode('standard', this)">
+                🏁 Result at End
+            </button>
+            <button class="toggle-btn ${quizSubMode === 'immediate' ? 'active' : ''}" onclick="setQuizSubMode('immediate', this)">
+                ⚡ Result per Qn
+            </button>
+        </div>
+        `;
+    }
+
+    html += `<div class="card action-card ${cardClass}" onclick="handleModuleSelect('all')">
                     <h3>Full Syllabus ${modeLabel}</h3>
                     <p>All Modules</p>
                 </div>`;
@@ -36,6 +61,15 @@ function renderChapters(chapters) {
     ).join('');
 
     container.innerHTML = html;
+}
+
+// --- NEW: Handle Sub-Mode Switching ---
+function setQuizSubMode(mode, btn) {
+    quizSubMode = mode;
+    // Re-render to update active classes strictly, 
+    // or just toggle UI classes for performance (using re-render here for simplicity)
+    const chapters = [...new Set(allQuestions.map(q => q.chapter))].sort((a, b) => a - b);
+    renderChapters(chapters);
 }
 
 function handleModuleSelect(chapter) {
@@ -57,6 +91,7 @@ function handleModuleSelect(chapter) {
     }
 }
 
+// --- 2. SUMMARY MODE ---
 function renderSummaryView(chapter) {
     navigateTo('view-summary-content');
 
@@ -118,11 +153,45 @@ function switchSummaryMode(mode) {
     }
 }
 
+// --- 3. QUIZ MODE & TIMER LOGIC ---
+
 function startQuiz() {
     currentQuestionIndex = 0;
     userAnswers = new Array(activeQuestions.length).fill(null);
     navigateTo('view-quiz');
+
+    startTimer();
     renderQuestion();
+}
+
+function startTimer() {
+    clearInterval(timerInterval);
+    startTime = Date.now();
+    updateTimerUI();
+
+    timerInterval = setInterval(() => {
+        updateTimerUI();
+    }, 1000);
+}
+
+function updateTimerUI() {
+    const elapsedSeconds = Math.floor((Date.now() - startTime) / 1000);
+    const minutes = Math.floor(elapsedSeconds / 60).toString().padStart(2, '0');
+    const seconds = (elapsedSeconds % 60).toString().padStart(2, '0');
+    document.getElementById('quiz-timer').innerText = `Time: ${minutes}:${seconds}`;
+}
+
+function stopTimer() {
+    clearInterval(timerInterval);
+    const elapsedSeconds = Math.floor((Date.now() - startTime) / 1000);
+    const minutes = Math.floor(elapsedSeconds / 60);
+    const seconds = elapsedSeconds % 60;
+
+    if (minutes > 0) {
+        return `${minutes}m ${seconds}s`;
+    } else {
+        return `${seconds}s`;
+    }
 }
 
 function renderQuestion() {
@@ -131,21 +200,67 @@ function renderQuestion() {
     document.getElementById('quiz-progress').innerText = `Question ${currentQuestionIndex + 1}/${activeQuestions.length}`;
 
     const optionsContainer = document.getElementById('options-container');
-    optionsContainer.innerHTML = q.options.map((opt, index) =>
-        `<button class="option-btn ${userAnswers[currentQuestionIndex] === index ? 'selected' : ''}" 
-            onclick="selectOption(${index})">
-            ${opt}
-        </button>`
-    ).join('');
+    const explanationBox = document.getElementById('quiz-explanation');
 
+    // Hide Explanation initially
+    explanationBox.classList.add('hidden');
+    optionsContainer.classList.remove('locked'); // Unlock options
+
+    const hasAnswered = userAnswers[currentQuestionIndex] !== null;
+
+    optionsContainer.innerHTML = q.options.map((opt, index) => {
+        let btnClass = '';
+
+        if (quizSubMode === 'standard') {
+            // Standard: Just show selected blue
+            if (userAnswers[currentQuestionIndex] === index) btnClass = 'selected';
+        } else {
+            // Immediate: Show Green/Red
+            if (hasAnswered) {
+                if (index === q.answerIndex) {
+                    btnClass = 'correct-immediate'; // Always show correct answer in green
+                } else if (userAnswers[currentQuestionIndex] === index) {
+                    btnClass = 'wrong-immediate'; // Show user's wrong answer in red
+                }
+            }
+        }
+
+        return `<button class="option-btn ${btnClass}" onclick="selectOption(${index})">${opt}</button>`;
+    }).join('');
+
+    // Immediate Mode Post-Answer Logic
+    if (quizSubMode === 'immediate' && hasAnswered) {
+        optionsContainer.classList.add('locked'); // Lock options so they can't change
+
+        // Show Explanation
+        explanationBox.innerHTML = `<strong>💡 Explanation:</strong> ${q.explanation || 'No explanation provided.'}`;
+        explanationBox.classList.remove('hidden');
+    }
+
+    // --- BUTTON LOGIC ---
+    const isFirst = currentQuestionIndex === 0;
     const isLast = currentQuestionIndex === activeQuestions.length - 1;
+
+    document.getElementById('prev-btn').classList.toggle('hidden', isFirst);
     document.getElementById('next-btn').classList.toggle('hidden', isLast);
     document.getElementById('submit-btn').classList.toggle('hidden', !isLast);
 }
 
 function selectOption(index) {
+    // If Immediate mode and already answered, do nothing (prevent changing)
+    if (quizSubMode === 'immediate' && userAnswers[currentQuestionIndex] !== null) {
+        return;
+    }
+
     userAnswers[currentQuestionIndex] = index;
     renderQuestion();
+}
+
+function prevQuestion() {
+    if (currentQuestionIndex > 0) {
+        currentQuestionIndex--;
+        renderQuestion();
+    }
 }
 
 function nextQuestion() {
@@ -156,6 +271,7 @@ function nextQuestion() {
 }
 
 function submitQuiz() {
+    const timeTaken = stopTimer();
     let score = 0;
     let resultHtml = '';
 
@@ -185,7 +301,20 @@ function submitQuiz() {
     const percentage = Math.round((score / activeQuestions.length) * 100);
 
     navigateTo('view-result');
-    document.getElementById('score-text').innerText = `${score}/${activeQuestions.length}`;
-    document.getElementById('score-percentage').innerText = `${percentage}% Accuracy`;
+
+    const summaryContainer = document.querySelector('.result-summary');
+    summaryContainer.innerHTML = `
+        <div class="score-card">
+            <span class="score-label">Score</span>
+            <h1 id="score-text">${score}/${activeQuestions.length}</h1>
+            <p id="score-percentage">${percentage}% Accuracy</p>
+        </div>
+        <div class="score-card" style="border-left: 5px solid #3b82f6;">
+            <span class="score-label">Time Taken</span>
+            <h1 id="time-text">${timeTaken}</h1>
+            <p>Duration</p>
+        </div>
+    `;
+
     document.getElementById('review-container').innerHTML = resultHtml;
 }
