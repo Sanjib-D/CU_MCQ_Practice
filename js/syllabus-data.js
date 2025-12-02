@@ -1,7 +1,6 @@
 const syllabusData = {
     "MCA": {
         "semesters": [
-            // --- SEMESTER I (CORE) ---
             {
                 "id": "sem1",
                 "title": "Semester I",
@@ -54,8 +53,6 @@ const syllabusData = {
                     }
                 ]
             },
-
-            // --- SEMESTER II (CORE) ---
             {
                 "id": "sem2",
                 "title": "Semester II",
@@ -108,14 +105,11 @@ const syllabusData = {
                     }
                 ]
             },
-
-            // --- SEMESTER III (SPECIALIZATION) ---
             {
                 "id": "sem3",
                 "title": "Semester III",
                 "type": "specialization",
                 "groups": [
-                    // Track 1: Cloud Computing
                     {
                         "name": "Cloud Computing",
                         "subjects": [
@@ -167,7 +161,6 @@ const syllabusData = {
                             }
                         ]
                     },
-                    // Track 2: Full Stack
                     {
                         "name": "Full Stack Development",
                         "subjects": [
@@ -218,7 +211,6 @@ const syllabusData = {
                             }
                         ]
                     },
-                    // Track 3: Data Analytics
                     {
                         "name": "Data Analytics",
                         "subjects": [
@@ -269,7 +261,6 @@ const syllabusData = {
                             }
                         ]
                     },
-                    // Track 4: AI & ML
                     {
                         "name": "Artificial Intelligence and Machine Learning",
                         "subjects": [
@@ -322,14 +313,11 @@ const syllabusData = {
                     }
                 ]
             },
-
-            // --- SEMESTER IV (SPECIALIZATION) ---
             {
                 "id": "sem4",
                 "title": "Semester IV",
                 "type": "specialization",
                 "groups": [
-                    // Track 1: Cloud Computing
                     {
                         "name": "Cloud Computing",
                         "subjects": [
@@ -362,7 +350,6 @@ const syllabusData = {
                             }
                         ]
                     },
-                    // Track 2: Full Stack
                     {
                         "name": "Full Stack Development",
                         "subjects": [
@@ -386,7 +373,6 @@ const syllabusData = {
                             }
                         ]
                     },
-                    // Track 3: Data Analytics
                     {
                         "name": "Data Analytics",
                         "subjects": [
@@ -410,7 +396,6 @@ const syllabusData = {
                             }
                         ]
                     },
-                    // Track 4: AI & ML
                     {
                         "name": "Artificial Intelligence and Machine Learning",
                         "subjects": [

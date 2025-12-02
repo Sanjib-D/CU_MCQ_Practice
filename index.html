@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,12 +8,13 @@
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
-<body>
 
+<body>
     <header>
         <div class="header-content">
-            <h1>MCA Hub</h1>
-            
+            <div class="header-left">
+                <h1>MCA Hub</h1>
+            </div>
             <div class="nav-controls">
                 <button id="back-btn" class="nav-btn hidden" onclick="goBack()">← Back</button>
                 <button id="home-btn" class="nav-btn hidden" onclick="resetApp()">🏠 Home</button>
@@ -21,7 +23,6 @@
     </header>
 
     <main id="app-container">
-        
         <section id="view-stream" class="view-section">
             <h2>Select Stream</h2>
             <div class="card-grid" id="stream-cards"></div>
@@ -50,13 +51,11 @@
                     <h3>View Syllabus</h3>
                     <p>Modules & Topics</p>
                 </div>
-
                 <div class="card action-card summary-card-bg" onclick="prepareMode('summary')">
                     <div class="icon">🧠</div>
                     <h3>Study Mode</h3>
                     <p>Read Q&A & Explanations</p>
                 </div>
-
                 <div class="card action-card practice-card-bg" onclick="prepareMode('quiz')">
                     <div class="icon">✍️</div>
                     <h3>Practice Test</h3>
@@ -67,14 +66,12 @@
 
         <section id="view-summary-content" class="view-section hidden">
             <h2 id="summary-title">Module Summary</h2>
-            <div id="summary-list" class="review-list">
-                </div>
+            <div id="summary-list" class="review-list"></div>
         </section>
 
         <section id="view-syllabus-content" class="view-section hidden">
             <h2 id="syllabus-title">Syllabus</h2>
-            <div id="syllabus-container" class="syllabus-box">
-                </div>
+            <div id="syllabus-container" class="syllabus-box"></div>
         </section>
 
         <section id="view-chapters" class="view-section hidden">
@@ -105,20 +102,18 @@
                     <p id="score-percentage">0%</p>
                 </div>
             </div>
-            
             <h3>Detailed Analysis</h3>
             <div id="review-container" class="review-list"></div>
-            
             <div class="result-actions">
                 <button class="secondary-btn" onclick="resetApp()">Home</button>
                 <button class="primary-btn" onclick="preparePractice()">Retry Test</button>
             </div>
         </section>
-
     </main>
 
     <script src="js/syllabus-data.js"></script>
     <script src="js/quiz-engine.js"></script>
     <script src="js/app.js"></script>
 </body>
+
 </html>
